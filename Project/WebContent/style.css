@@ -1,0 +1,19 @@
+.title{
+	margin:30px 0;
+	text-align: center;
+}
+h1.title{
+	margin-bottom:60px;
+}
+.center {
+	text-align: center;
+}
+input.center{
+	margin-bottom:40px;
+}
+.right{
+	text-align: right;
+}
+p.right{
+	margin-right:50px;
+}
