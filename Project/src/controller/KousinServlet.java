@@ -20,15 +20,39 @@ public class KousinServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		 String loginId = request.getParameter("loginId");
 		UserDao userDao = new UserDao();
-		User user = userDao.kousinUser(loginId);
+		User user = userDao.detailUser(loginId);
 
-		request.setAttribute("kousinUser", user);
+		request.setAttribute("userDetail", user);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/kousin.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+		request.setCharacterEncoding("UTF-8");
+		String loginId = request.getParameter("loginId");
+		String pass = request.getParameter("pass");
+		String pass2 = request.getParameter("pass2");
+		String username = request.getParameter("username");
+		String birth = request.getParameter("birth");
 
+		if(!pass.equals(pass2)) {
+			UserDao userDao = new UserDao();
+			User user = userDao.detailUser(loginId);
+
+			request.setAttribute("userDetail", user);
+			request.setAttribute("errMsg", "入力したパスワードが一致しません");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/kousin.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		UserDao userDao = new UserDao();
+		if(pass.equals("")) {
+			userDao.kousinUser(loginId,username,birth);
+		}else {
+		userDao.kousinUser(loginId,pass,username,birth);
+		}
+		response.sendRedirect("UserListServlet");
+	}
 }

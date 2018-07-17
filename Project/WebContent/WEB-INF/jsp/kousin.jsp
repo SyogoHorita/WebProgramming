@@ -15,23 +15,28 @@
 <font color="white">${userInfo.name} さん</font></p>
 <a href="LogoutServlet"><p class="right"><font color="red">ログアウト</font></p></a>
 </nav>
+<c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+	</c:if>
 <h2 class="title">ユーザ情報更新</h2>
-<form action="UserList.html" method="post">
+<form action="KousinServlet" method="post">
 <p class="center" style="margin-right:100px">ログインID　　　
-${kousinUser.loginId}
-<input type="hidden" value="${kousinUser.loginId}" name="loginId"><br>
+${userDetail.loginId}
+<input type="hidden" value="${userDetail.loginId}" name="loginId"><br>
 </p>
 <p class="center">パスワード
 <input type="text" name="pass" style="margin-left:20px"><br>
 </p>
 <p class="center" style="margin-right:10px">パスワード(確認)
-<input type="text" name="pass" style="margin-right:13px"><br>
+<input type="text" name="pass2" style="margin-right:13px"><br>
 </p>
 <p class="center">ユーザ名
-<input style="margin-left:35px" type="text" value="${kousinUser.name}" name="username"><br>
+<input style="margin-left:35px" type="text" value="${userDetail.name}" name="username"><br>
 </p>
 <p class="center">生年月日
-<input type="date" value="${kousinUser.birthDate}"style="margin-left:20px" name="birth"><br>
+<input type="date" value="${userDetail.birthDate}"style="margin-left:20px" name="birth"><br>
 <p class="center">
 <input type="submit" style="margin-top:20px" value="更新">
 </form>
