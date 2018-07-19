@@ -17,18 +17,18 @@
 </nav>
 <h2 class="title">ユーザ一覧</h2>
 <a href="NewUserServlet"><p class="right">新規登録</p></a><br>
-<form action="" method="post">
+<form action="UserListServlet" method="post">
 <p class="center">ログインID
-<input type="text" style="margin-left:40px" name="id2">
+<input type="text" style="margin-left:40px" name="id">
 <p class="center">ユーザ名
 <input type="text" style="margin-left:55px" name="userName">
 <p class="center" style="margin-left:165px">生年月日
 <input type="date" style="margin-left:55px" name="date">～
 <input type="date" name="date2">
+<input type="submit" value="検索">
 </form>
 <br>
 <p class="center" style="margin-left:700px">
-<input type="submit" value="検索">
 <hr>
 
 <div class="container">
@@ -49,8 +49,12 @@
 	      <td>${user.name}</td>
 	      <td>${user.birthDate}</td>
 	      <td><a href="UserDetailServlet?loginId=${user.loginId}" class="btn btn-primary">詳細</a>
-	      <a href="KousinServlet?loginId=${user.loginId}" class="btn btn-success">更新</a>
-	      <button type="button" class="btn btn-danger">削除</button></td>
+	      <c:if test='${userInfo.loginId =="admin" || userInfo.loginId == user.loginId}'>
+	      <a href="KousinServlet?loginId=${user.loginId}" class="btn btn-success">更新</a></c:if>
+	      <c:if test='${userInfo.loginId =="admin"}'>
+	      <a href="DeleteServlet?loginId=${user.loginId}" class="btn btn-danger">削除</a></c:if>
+	      </td>
+
 	    </tr>
 	    </c:forEach>
 	  </tbody>
